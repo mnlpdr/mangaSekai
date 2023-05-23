@@ -1,0 +1,13 @@
+.mat-toolbar-row {
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

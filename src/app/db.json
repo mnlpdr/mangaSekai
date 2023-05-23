@@ -1,0 +1,16 @@
+{
+  "comments": [],
+  "posts": [],
+  "profile": [],
+  "mangas": [
+    {
+      "id": 1,
+      "name": "One Piece",
+      "chapter": "1034",
+      "description": "Um mangá sobre piratas",
+      "author": "Eiichiro Oda",
+      "genre": "Aventura",
+      "publication": "Weekly Shōnen Jump"
+    }
+  ]
+}
