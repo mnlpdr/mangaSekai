@@ -1,0 +1,27 @@
+{
+  "comments": [],
+  "posts": [],
+  "profile": [],
+  "mangas": [
+    {
+      "id": 1,
+      "name": "One Piece",
+      "chapter": "1034",
+      "description": "Um mangá sobre piratas",
+      "author": "Eiichiro Oda",
+      "genre": "Aventura",
+      "publication": "Weekly Shōnen Jump",
+      "image": "https://gizmodo.uol.com.br/wp-content/blogs.dir/8/files/2022/02/one-piece-800x450.jpg"
+    },
+    {
+      "name": "Boku no hero",
+      "chapter": "20",
+      "description": "Isuku começa a treinar para dominar o one for all, porém todas vez que ele toda a sua potência os ossos do seu corpo se quebram",
+      "author": "Kōhei Horikoshi",
+      "genre": "Shounen",
+      "publication": "2014",
+      "image": "https://akamai.sscdn.co/uploadfile/letras/fotos/e/3/3/0/e330474a405ac6000a077dc695dd6161.jpg",
+      "id": 3
+    }
+  ]
+}

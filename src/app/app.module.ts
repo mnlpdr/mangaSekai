@@ -13,18 +13,14 @@ import {MatListModule} from "@angular/material/list";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
-import { MenuComponent } from './menu/menu.component';
-import { AddMangaComponent } from './add-manga/add-manga.component';
-import { MangaListComponent } from './manga-list/manga-list.component';
+import {MangaModule} from "./manga/manga.module";
 import { HttpClientModule } from '@angular/common/http';
+import { MenuModule} from "./menu/menu.module";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent,
-    AddMangaComponent,
-    MangaListComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +36,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatMenuModule,
     MatIconModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MangaModule,
+    MenuModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

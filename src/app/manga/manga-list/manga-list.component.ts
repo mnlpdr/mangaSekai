@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MangaService } from '../manga.service';
-import { Manga } from '../models/manga.model';
+import { MangaService } from '../../shared/service/manga.service';
+import { Manga } from '../../shared/models/manga.model';
 
 @Component({
   selector: 'app-manga-list',
@@ -8,7 +8,7 @@ import { Manga } from '../models/manga.model';
   styleUrls: ['./manga-list.component.css']
 })
 export class MangaListComponent implements OnInit {
-  mangas: Manga[] = [];
+  mangas: Array<Manga> = [];
 
   constructor(private mangaService: MangaService) { }
 
@@ -17,7 +17,7 @@ export class MangaListComponent implements OnInit {
   }
 
   fetchMangas(): void {
-    this.mangaService.getMangas().subscribe((data: any) => {
+    this.mangaService.getMangas().subscribe((data) => {
       this.mangas = data;
     });
   }

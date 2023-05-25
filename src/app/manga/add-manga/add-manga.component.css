@@ -1,0 +1,10 @@
+.manga-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .manga-form-field {
+    margin-bottom: 20px;
+  }
+
