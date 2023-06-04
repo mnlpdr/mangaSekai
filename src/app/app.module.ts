@@ -1,21 +1,14 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatCardModule} from "@angular/material/card";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatButtonModule} from "@angular/material/button";
-import {MatListModule} from "@angular/material/list";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatMenuModule} from "@angular/material/menu";
-import {MatIconModule} from "@angular/material/icon";
 import {MangaModule} from "./manga/manga.module";
-import { HttpClientModule } from '@angular/common/http';
 import { MenuModule} from "./menu/menu.module";
+import { CurrencyPipe } from '@angular/common'
+import { LOCALE_ID } from '@angular/core';
+import localePt from '@angular/common/locales/pt';
+import {registerLocaleData} from '@angular/common';
+import { ImportsModuleModule } from './imports-module/imports-module.module';
+registerLocaleData(localePt);
 
 
 @NgModule({
@@ -23,25 +16,15 @@ import { MenuModule} from "./menu/menu.module";
     AppComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatListModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    HttpClientModule,
     MangaModule,
-    MenuModule
+    MenuModule,
+    ImportsModuleModule
 
   ],
-  providers: [],
+  providers: [
+    CurrencyPipe,
+    { provide: LOCALE_ID, useValue: 'pt-BR' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

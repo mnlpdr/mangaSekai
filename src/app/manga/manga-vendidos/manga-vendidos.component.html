@@ -1,0 +1,10 @@
+<mat-table [dataSource]="dataSource">
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <ng-container matColumnDef="{{coluna}}" *ngFor="let coluna of displayedColumns">
+        <mat-header-cell *matHeaderCellDef>{{coluna | titlecase}}</mat-header-cell>
+        <mat-cell *matCellDef="let item">
+            <div *ngIf="coluna != 'acoes'">{{item[coluna]}}</div>
+        </mat-cell>
+    </ng-container>
+</mat-table>

@@ -1,16 +1,25 @@
 <mat-card>
   <mat-card-content>
-    <form [formGroup]="mangaForm" (ngSubmit)="onSubmit()" class="manga-form">
+    <form [formGroup]="mangaForm" *ngIf="mangaForm"(ngSubmit)="onSubmit()" class="manga-form">
+      
       <mat-form-field class="manga-form-field">
         <mat-label>Nome do Mangá</mat-label>
         <input matInput formControlName="name">
         <mat-icon matSuffix>book</mat-icon>
       </mat-form-field>
+
       <mat-form-field class="manga-form-field">
         <mat-label>Número do Capítulo</mat-label>
         <input matInput formControlName="chapter">
         <mat-icon matSuffix>format_list_numbered</mat-icon>
       </mat-form-field>
+
+      <mat-form-field class="manga-form-field">
+        <mat-label>preço</mat-label>
+        <input matInput formControlName="price">
+        <mat-icon matSuffix>attach_money</mat-icon>
+      </mat-form-field>
+
       <mat-form-field class="manga-form-field">
         <mat-label>Descrição</mat-label>
         <textarea matInput formControlName="description"></textarea>
@@ -21,21 +30,25 @@
         <input matInput formControlName="author">
         <mat-icon matSuffix>person</mat-icon>
       </mat-form-field>
+
       <mat-form-field class="manga-form-field">
         <mat-label>Gênero</mat-label>
         <input matInput formControlName="genre">
         <mat-icon matSuffix>local_play</mat-icon>
       </mat-form-field>
+
       <mat-form-field class="manga-form-field">
         <mat-label>Revista de Publicação</mat-label>
         <input matInput formControlName="publication">
         <mat-icon matSuffix>import_contacts</mat-icon>
       </mat-form-field>
+
       <mat-form-field class="manga-form-field">
         <mat-label>imagem</mat-label>
         <input matInput formControlName="image">
         <mat-icon matSuffix>image</mat-icon>
       </mat-form-field>
+
       <button mat-raised-button color="primary" type="submit" [disabled]="mangaForm.invalid">Adicionar Mangá</button>
     </form>
   </mat-card-content>

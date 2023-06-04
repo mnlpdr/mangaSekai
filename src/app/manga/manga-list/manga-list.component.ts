@@ -21,4 +21,11 @@ export class MangaListComponent implements OnInit {
       this.mangas = data;
     });
   }
+  deleteManga(manga: Manga): void {
+    if (manga.id) {
+      this.mangaService.deleteManga(manga.id).subscribe(() => {
+        this.mangas = this.mangas.filter((m) => m.id !== manga.id);
+      });
+    }
+  }
 }

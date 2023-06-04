@@ -2,26 +2,30 @@
   "comments": [],
   "posts": [],
   "profile": [],
+  "mangaSold": [
+    {
+      "name": "café",
+      "chapter": "1",
+      "price": "10",
+      "description": "café é muito bom",
+      "author": "taw-ham",
+      "genre": "aventura",
+      "publication": "shonen jump",
+      "image": "https://images.unsplash.com/photo-1544931733-7ee200c8ca3c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2FmJUMzJUE5fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+      "id": 1
+    }
+  ],
   "mangas": [
     {
-      "id": 1,
-      "name": "One Piece",
-      "chapter": "1034",
-      "description": "Um mangá sobre piratas",
-      "author": "Eiichiro Oda",
-      "genre": "Aventura",
-      "publication": "Weekly Shōnen Jump",
-      "image": "https://gizmodo.uol.com.br/wp-content/blogs.dir/8/files/2022/02/one-piece-800x450.jpg"
-    },
-    {
-      "name": "Boku no hero",
-      "chapter": "20",
-      "description": "Isuku começa a treinar para dominar o one for all, porém todas vez que ele toda a sua potência os ossos do seu corpo se quebram",
-      "author": "Kōhei Horikoshi",
-      "genre": "Shounen",
-      "publication": "2014",
-      "image": "https://akamai.sscdn.co/uploadfile/letras/fotos/e/3/3/0/e330474a405ac6000a077dc695dd6161.jpg",
-      "id": 3
+      "name": "café",
+      "chapter": "1",
+      "price": "10",
+      "description": "café é muito bom",
+      "author": "taw-ham",
+      "genre": "aventura",
+      "publication": "shonen jump",
+      "image": "https://images.unsplash.com/photo-1544931733-7ee200c8ca3c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2FmJUMzJUE5fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+      "id": 1
     }
   ]
 }

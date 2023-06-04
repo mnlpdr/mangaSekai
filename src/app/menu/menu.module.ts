@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu/menu.component';
-import {MatButtonModule} from "@angular/material/button";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {RouterLink} from "@angular/router";
+import { ImportsModuleModule } from '../imports-module/imports-module.module';
 
 
 
@@ -16,9 +14,7 @@ import {RouterLink} from "@angular/router";
   ],
   imports: [
     CommonModule,
-    MatButtonModule,
-    MatToolbarModule,
-    RouterLink
+    ImportsModuleModule,
   ]
 })
 export class MenuModule { }
