@@ -19,11 +19,13 @@ export class LoginComponent {
   onSubmit() {
     if (this.vendorForm.valid) {
       const vendor = this.vendorForm.value;
-        this.vendorService.loginVendor(vendor).subscribe(
-          res => {
-            this.router.navigate(['/manga']);
-            console.log(res);
-      })
+      this.vendorService.loginVendor(vendor).subscribe(
+        res => {
+          localStorage.setItem('token', res.token);
+          this.router.navigate(['/manga']);
+          console.log(res);
+        }
+      )
     }
   }
 }

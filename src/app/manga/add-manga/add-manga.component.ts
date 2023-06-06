@@ -40,14 +40,14 @@ export class AddMangaComponent implements OnInit {
     }
     else {
       this.mangaForm = this.fb.group({
-        name: [this.manga.name, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern('^[a-zA-ZÀ-ÿ0-9 ,]+$')]],
+        name: [this.manga.name, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern('^[a-zA-ZÀ-ÿ0-9 ]+$')]],
         chapter: [this.manga.chapter, [Validators.required, Validators.pattern('^[0-9]+$')]],
         price: [this.manga.price, [Validators.required, Validators.pattern('^[0-9]+$')]],
         description: [this.manga.description, [Validators.required, Validators.minLength(8), Validators.maxLength(50), Validators.pattern('^[a-zA-ZÀ-ÿ0-9 ,()]+$')]],
         author: [this.manga.author, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern('^[a-zA-ZÀ-ÿ ]+$')]],
         genre: [this.manga.genre, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern('^[a-zA-ZÀ-ÿ ]+$')]],
         publication: [this.manga.publication, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern('^[a-zA-ZÀ-ÿ ]+$')]],
-        image: [this.manga.image, Validators.required]
+        image: [this.manga.image, Validators.required, Validators.pattern('^(https?:\/\/)?[\w.-]+\.[a-z]{2,}(\/.*)?$')]
       });
     }
   }
