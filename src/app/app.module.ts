@@ -8,6 +8,8 @@ import { LOCALE_ID } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
 import { ImportsModuleModule } from './imports-module/imports-module.module';
+import { VendorModule } from './vendor/vendor.module';
+import {InterceptorModule} from './interceptor/interceptor.module';
 registerLocaleData(localePt);
 
 
@@ -19,7 +21,9 @@ registerLocaleData(localePt);
     AppRoutingModule,
     MangaModule,
     MenuModule,
-    ImportsModuleModule
+    ImportsModuleModule,
+    VendorModule,
+    InterceptorModule
 
   ],
   providers: [

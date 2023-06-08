@@ -22,7 +22,7 @@ export class AddMangaComponent implements OnInit {
     if (id) {
       this.mangaRegister = false;
       this.nameBotao = "Save";
-      this.mangaService.getManga(+id).subscribe(
+      this.mangaService.getManga(id).subscribe(
         data => {
           this.manga = data;
           this.mangaForm = this.fb.group({
@@ -47,7 +47,7 @@ export class AddMangaComponent implements OnInit {
         author: [this.manga.author, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern('^[a-zA-ZÀ-ÿ ]+$')]],
         genre: [this.manga.genre, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern('^[a-zA-ZÀ-ÿ ]+$')]],
         publication: [this.manga.publication, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern('^[a-zA-ZÀ-ÿ ]+$')]],
-        image: [this.manga.image, Validators.required, Validators.pattern('^(https?:\/\/)?[\w.-]+\.[a-z]{2,}(\/.*)?$')]
+        image: [this.manga.image, [Validators.required]]
       });
     }
   }
@@ -59,6 +59,8 @@ export class AddMangaComponent implements OnInit {
     if (this.mangaForm.valid) {
       const id = this.manga.id;
       this.manga = this.mangaForm.value;
+      this.manga.price = +this.manga.price;
+      this.manga.chapter = +this.manga.chapter;
       this.manga.id = id;
       if (this.mangaRegister) {
         this.mangaService.addManga(this.manga).subscribe(

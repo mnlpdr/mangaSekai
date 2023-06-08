@@ -8,14 +8,14 @@ import { Token } from '../models/token.model';
   providedIn: 'root'
 })
 export class VendorService {
-  URL = 'http://localhost:3000/vendor';
+  URL = 'http://localhost:8000/vendedor';
 
   constructor(private http: HttpClient) { }
   
 
   registerVendor(vendor: RegisterVendor) {
 
-    return this.http.post(`${this.URL}/cadastro`, vendor);
+    return this.http.post(`${this.URL}/cadastrar`, vendor);
   }
   loginVendor(vendor: LoginVendor) {
     return this.http.post<Token>(`${this.URL}/login`,vendor);

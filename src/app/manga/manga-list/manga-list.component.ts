@@ -18,6 +18,7 @@ export class MangaListComponent implements OnInit {
 
   fetchMangas(): void {
     this.mangaService.getMangas().subscribe((data) => {
+      console.log(data);
       this.mangas = data;
     });
   }

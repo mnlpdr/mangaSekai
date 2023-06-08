@@ -26,7 +26,7 @@ export class CadastroComponent {
       if (vendor.password === vendor.confirmPassword) {
         this.vendorService.registerVendor(vendor).subscribe(
           res => {
-            this.router.navigate(['/login']);
+            this.router.navigate(['login/vendedor']);
             console.log(res);
         })
       }
