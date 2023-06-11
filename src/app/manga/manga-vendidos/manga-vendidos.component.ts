@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import { Manga } from 'src/app/shared/models/manga.model';
-import { MangaService } from 'src/app/shared/service/manga.service';
+import { MangaView } from 'src/app/shared/models/mangaView.model';
+import { VendorService } from 'src/app/shared/service/vendor.service';
 
 @Component({
   selector: 'app-manga-vendidos',
@@ -9,9 +9,9 @@ import { MangaService } from 'src/app/shared/service/manga.service';
   styleUrls: ['./manga-vendidos.component.css']
 })
 export class MangaVendidosComponent {
-  dataSource: MatTableDataSource<Manga>;
+  dataSource: MatTableDataSource<MangaView>;
   displayedColumns: string[] = ['name', 'chapter', 'price'];
-  constructor(private mangaService: MangaService) {
+  constructor(private mangaService: VendorService) {
     this.dataSource = new MatTableDataSource();
     this.mangaService.getMangaSold().subscribe(
       data => {

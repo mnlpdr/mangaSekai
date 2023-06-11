@@ -1,0 +1,20 @@
+<h1> Total a pagar {{checkoutTotal | currency: 'BRL': 'symbol'}}</h1>
+
+<div fxLayout="row wrap" fxLayout.lt-sm="column">
+  <mat-card class = "card-manga" fxFlex="16.7" *ngFor="let manga of mangas">
+      <img mat-card-xl-image [src]="manga.image" alt="image anime"/>
+      <mat-card-header>
+        <mat-card-title>{{manga.name}}</mat-card-title>
+        <mat-card-subtitle>Capítulo {{manga.chapter}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{manga.description}}</p>
+        <p>Autor: {{manga.author}}</p>
+        <p>Gênero: {{manga.genre}}</p>
+        <p>Publicado em:{{manga.publication}}</p>
+        <p> preço: {{manga.price|currency:'BRL':'symbol'}}</p>
+      </mat-card-content>
+  </mat-card>
+</div>
+
+

@@ -1,0 +1,23 @@
+<div fxLayout="row wrap" fxLayout.lt-sm="column">
+
+    <mat-card class = "card-manga" fxFlex="20" *ngFor="let manga of mangas">
+        <img [ngSrc]="manga.image" alt="image anime" width="288" height="200"/>
+        <mat-card-header>
+          <mat-card-title>{{manga.name}}</mat-card-title>
+          <mat-card-subtitle>Capítulo {{manga.chapter}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{manga.description}}</p>
+          <p>Autor: {{manga.author}}</p>
+          <p>Gênero: {{manga.genre}}</p>
+          <p>Publicado em:{{manga.publication}}</p>
+          <p> preço: {{manga.price|currency:'BRL':'symbol'}}</p>
+        </mat-card-content>
+      <mat-card-footer>
+        <mat-card-actions>
+          <button (click)="addShoppingCart(manga)" mat-button color="primary"><mat-icon> add_shopping_cart </mat-icon></button>
+        </mat-card-actions>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+  

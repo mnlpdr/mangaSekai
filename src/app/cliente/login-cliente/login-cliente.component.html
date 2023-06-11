@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-content>
-      <form [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
         <div>
           <mat-form-field class="manga-form-field">
             <mat-label>email</mat-label>
@@ -16,7 +16,7 @@
             <mat-icon matSuffix>password</mat-icon>
           </mat-form-field>
         </div>
-        <button mat-raised-button color="primary" type="submit" [disabled]="vendorForm.invalid"> Login </button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="clientForm.invalid"> Login </button>
       </form>
     </mat-card-content>
 </mat-card>

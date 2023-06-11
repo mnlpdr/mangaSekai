@@ -9,21 +9,25 @@ import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
 import { ImportsModuleModule } from './imports-module/imports-module.module';
 import { VendorModule } from './vendor/vendor.module';
+import { ClienteModule } from './cliente/cliente.module';
 import {InterceptorModule} from './interceptor/interceptor.module';
 registerLocaleData(localePt);
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
+ 
   ],
   imports: [
     AppRoutingModule,
-    MangaModule,
     MenuModule,
     ImportsModuleModule,
     VendorModule,
-    InterceptorModule
+    InterceptorModule,
+    ClienteModule,
+    MangaModule
+    
 
   ],
   providers: [

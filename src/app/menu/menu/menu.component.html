@@ -2,10 +2,24 @@
   <mat-toolbar-row>
     <span class="logo">mangáSekai</span>
     <span class="spacer"></span>
-
-    <button mat-button routerLink="manga">Início</button>
-    <button mat-button routerLink="manga/cadastrar"> Cadastrar </button>
-    <button mat-button routerLink="manga/vendidos">Vendidos</button>
-    <button mat-button (click) = "logout()">Logout</button>
+    <div *ngIf="user === 'vendor'"> 
+      <button mat-button routerLink="manga">Início</button>
+      <button mat-button routerLink="manga/cadastrar"> Cadastrar </button>
+      <button mat-button routerLink="manga/vendidos">Vendidos</button>
+      <button mat-button (click) = "logout()">Logout</button>
+    </div>
+    <div *ngIf="user === 'client'"> 
+      <button mat-button routerLink="cliente/produto"><mat-icon>home</mat-icon></button>
+      <button mat-button routerLink="cliente/carrinho">	<mat-icon>shopping_cart</mat-icon> </button>
+      <button mat-button routerLink="cliente/checkout"> compras </button>
+      <button mat-button (click) = "logout()">Logout</button>
+    </div>
+    <div *ngIf="user === ''"> 
+      <button mat-button routerLink="cadastro/vendedor"> Cadastro vendedor </button>
+      <button mat-button routerLink="cadastro/cliente"> Cadastro cliente </button>
+      <button mat-button routerLink="login/vendedor"> Login vendedor </button>
+      <button mat-button routerLink="login/cliente"> Login cliente </button>
+    </div>
   </mat-toolbar-row>
+
 </mat-toolbar>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {MangaService} from "../../shared/service/manga.service";
+import { VendorService } from 'src/app/shared/service/vendor.service';
 import {Manga} from "../../shared/models/manga.model";
 import {Router, ActivatedRoute} from '@angular/router';
 
@@ -16,7 +16,7 @@ export class AddMangaComponent implements OnInit {
   manga: Manga;
 
 
-  constructor(private fb: FormBuilder, private mangaService: MangaService, private router: Router, private routeActive: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private mangaService: VendorService, private router: Router, private routeActive: ActivatedRoute) {
     const id = this.routeActive.snapshot.paramMap.get('id');
     this.manga = new Manga("", 0, 0,  "", "", "", "", "")
     if (id) {

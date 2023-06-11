@@ -1,18 +1,11 @@
 <mat-card>
     <mat-card-content>
-      <form [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
         <div>
           <mat-form-field class="manga-form-field">
             <mat-label>Nome</mat-label>
             <input matInput formControlName="name">
             <mat-icon matSuffix>book</mat-icon>
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field class="manga-form-field">
-            <mat-label>Descrição</mat-label>
-            <input matInput formControlName="description">
-            <mat-icon matSuffix>format_list_numbered</mat-icon>
           </mat-form-field>
         </div>
         
@@ -29,6 +22,7 @@
           <mat-form-field class="manga-form-field">
             <mat-label>Senha</mat-label>
             <input matInput formControlName="password" type="password">
+            <mat-icon matSuffix>password</mat-icon>
           </mat-form-field>
         </div>
         <div> 
@@ -38,7 +32,7 @@
             <mat-icon matSuffix>password</mat-icon>
           </mat-form-field>
         </div>
-        <button mat-raised-button color="primary" type="submit" [disabled]="vendorForm.invalid"> Cadastrar </button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="clientForm.invalid"> Cadastrar </button>
       </form>
     </mat-card-content>
 </mat-card>

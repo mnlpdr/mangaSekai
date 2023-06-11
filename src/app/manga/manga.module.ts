@@ -3,6 +3,7 @@ import { MangaListComponent } from './manga-list/manga-list.component';
 import { AddMangaComponent } from './add-manga/add-manga.component';
 import { MangaVendidosComponent } from './manga-vendidos/manga-vendidos.component';
 import { ImportsModuleModule } from '../imports-module/imports-module.module';
+import { MangaListClientComponent } from './manga-list-client/manga-list-client.component';
 
 
 
@@ -10,7 +11,8 @@ import { ImportsModuleModule } from '../imports-module/imports-module.module';
   declarations: [
     MangaListComponent,
     AddMangaComponent,
-    MangaVendidosComponent
+    MangaVendidosComponent,
+    MangaListClientComponent
   ],
   imports: [
     ImportsModuleModule

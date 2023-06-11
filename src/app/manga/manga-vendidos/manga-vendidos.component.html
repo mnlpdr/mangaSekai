@@ -4,7 +4,7 @@
         <ng-container matColumnDef="{{coluna}}" *ngFor="let coluna of displayedColumns">
         <mat-header-cell *matHeaderCellDef>{{coluna | titlecase}}</mat-header-cell>
         <mat-cell *matCellDef="let item">
-            <div *ngIf="coluna != 'acoes'">{{item[coluna]}}</div>
+            <div>{{item[coluna]}}</div>
         </mat-cell>
     </ng-container>
 </mat-table>

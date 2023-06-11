@@ -15,6 +15,7 @@ import {RouterLink} from "@angular/router";
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {FlexModule} from "@angular/flex-layout";
 import {MatTableModule} from '@angular/material/table';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -58,7 +59,8 @@ import {MatTableModule} from '@angular/material/table';
     CommonModule,
     NgOptimizedImage,
     FlexModule,
-    MatTableModule
+    MatTableModule,
+    MatGridListModule
   ]
 })
 export class ImportsModuleModule { }

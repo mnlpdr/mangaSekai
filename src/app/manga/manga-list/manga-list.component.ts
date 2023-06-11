@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MangaService } from '../../shared/service/manga.service';
+import { VendorService } from 'src/app/shared/service/vendor.service';
 import { Manga } from '../../shared/models/manga.model';
 
 @Component({
@@ -10,7 +10,7 @@ import { Manga } from '../../shared/models/manga.model';
 export class MangaListComponent implements OnInit {
   mangas: Array<Manga> = [];
 
-  constructor(private mangaService: MangaService) { }
+  constructor(private mangaService: VendorService) { }
 
   ngOnInit(): void {
     this.fetchMangas();
