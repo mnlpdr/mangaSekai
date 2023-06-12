@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { MangaView } from 'src/app/shared/models/mangaView.model';
-import { ClientService } from 'src/app/shared/service/client.service';
+import { MangaViewFirestore } from 'src/app/shared/models/firestore/registerProductFirestore';
+import { ClientFirestoreService } from 'src/app/shared/service/firestore/client-firestore.service';
+import { ProductFirestoreService } from 'src/app/shared/service/firestore/product-firestore.service';
 
 @Component({
   selector: 'app-manga-list-client',
@@ -8,22 +9,23 @@ import { ClientService } from 'src/app/shared/service/client.service';
   styleUrls: ['./manga-list-client.component.css']
 })
 export class MangaListClientComponent {
-  mangas: Array<MangaView> = [];
+  mangas: Array<MangaViewFirestore> = Array<MangaViewFirestore>();
 
-  constructor(private clientService: ClientService) { }
+  constructor(private clientService: ClientFirestoreService, private mangaService: ProductFirestoreService) { }
 
   ngOnInit(): void {
     this.fetchMangas();
   }
 
   fetchMangas(): void {
-    this.clientService.getAllManga().subscribe((data) => {
+    this.mangaService.getAllProduct().subscribe((data) => {
       console.log(data);
       this.mangas = data;
     });
   }
-  addShoppingCart(manga: MangaView): void {
-    this.clientService.addShoppingCart(manga).subscribe(
+  addShoppingCart(manga: MangaViewFirestore): void {
+    const idClient: string = localStorage.getItem('client') || "";
+    this.clientService.AddProductToShoppingCart(idClient, manga).subscribe(
       (data) => { 
         console.log(data);
     });

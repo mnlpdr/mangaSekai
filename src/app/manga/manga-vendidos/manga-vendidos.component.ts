@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import { MangaView } from 'src/app/shared/models/mangaView.model';
-import { VendorService } from 'src/app/shared/service/vendor.service';
+import { MangaViewFirestore } from 'src/app/shared/models/firestore/registerProductFirestore';
+import { VendorFirestoreService } from 'src/app/shared/service/firestore/vendor-firestore.service';
 
 @Component({
   selector: 'app-manga-vendidos',
@@ -9,11 +9,12 @@ import { VendorService } from 'src/app/shared/service/vendor.service';
   styleUrls: ['./manga-vendidos.component.css']
 })
 export class MangaVendidosComponent {
-  dataSource: MatTableDataSource<MangaView>;
+  dataSource: MatTableDataSource<MangaViewFirestore>;
   displayedColumns: string[] = ['name', 'chapter', 'price'];
-  constructor(private mangaService: VendorService) {
+  constructor(private vendorService: VendorFirestoreService) {
     this.dataSource = new MatTableDataSource();
-    this.mangaService.getMangaSold().subscribe(
+    const idVendor: string = localStorage.getItem('id') || "";
+    this.vendorService.getAllProductSold(idVendor).subscribe(
       data => {
         this.dataSource = new MatTableDataSource(data);
       }

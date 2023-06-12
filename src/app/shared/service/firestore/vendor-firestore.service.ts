@@ -3,6 +3,7 @@ import {from, Observable} from 'rxjs';
 import { VendorFirestore } from '../../models/firestore/registerVendorFirestore';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
+import { MangaViewFirestore } from '../../models/firestore/registerProductFirestore';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +25,26 @@ export class VendorFirestoreService {
         const doc = result.docs[0];
         const data = doc.data() as VendorFirestore;
         const id = doc.id;
+        localStorage.setItem('vendor', doc.id);
         return new VendorFirestore(id, data);
         
         // Do something with data and id
         
       })
-    )
+    );
+  } 
+  getAllProductSold(id: string): Observable<Array<MangaViewFirestore>> {
+    return this.collectionVendor.doc(id).collection('sold').get().pipe(
+      map(result => {
+        return result.docs.map(doc => {
+          const data = doc.data();
+          const id = doc.id;
+          return new MangaViewFirestore(id, data);
+        });
+      })
+    );
+  }
+  addProductToSold(id: string, product: MangaViewFirestore): Observable<object> {
+    return from(this.collectionVendor.doc(id).collection('sold').add({...product}));
   }
 }

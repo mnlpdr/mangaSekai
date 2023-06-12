@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MangaViewFirestore } from 'src/app/shared/models/firestore/registerProductFirestore';
 import { MangaView } from 'src/app/shared/models/mangaView.model';
 import { ClientService } from 'src/app/shared/service/client.service';
+import { ClientFirestoreService } from 'src/app/shared/service/firestore/client-firestore.service';
 
 @Component({
   selector: 'app-get-all-product-shopping-cart',
@@ -9,11 +11,11 @@ import { ClientService } from 'src/app/shared/service/client.service';
 })
 export class GetAllProductShoppingCartComponent implements OnInit{
 
-  mangas: Array<MangaView> = new Array<MangaView>();
+  mangas: Array<MangaViewFirestore> = new Array<MangaViewFirestore>();
   purchaseTotal = 0;
   purchase = true;
 
-  constructor(private clientService: ClientService) { }
+  constructor(private clientService: ClientFirestoreService) { }
 
   ngOnInit(): void {
     this.fetchAllProductShoppingCart();
@@ -22,14 +24,15 @@ export class GetAllProductShoppingCartComponent implements OnInit{
   }
 
   priceTotal() {
-    this.purchaseTotal = this.mangas.reduce((acc, manga) => acc + manga.price, 0);
+    this.purchaseTotal = this.mangas.reduce((acc, manga) => acc + (manga.price || 0), 0);
     if (this.purchaseTotal > 0) {
       this.purchase = false;
     }
   }
 
   fetchAllProductShoppingCart() {
-    this.clientService.AllProductsShoppingCart().subscribe(
+    const id = localStorage.getItem('client') || "";
+    this.clientService.getAllProductShoppingCart(id).subscribe(
       data => {
         console.log(data)
         this.mangas = data;
@@ -39,7 +42,8 @@ export class GetAllProductShoppingCartComponent implements OnInit{
   }
   
   deleteProductShoppingCart(id: string) {
-    this.clientService.deleteProductShoppingCart(id).subscribe(
+    const idClient: string = localStorage.getItem('client') || "";
+    this.clientService.deleteProductShoppingCart(idClient, id).subscribe(
       data => {
         const index = this.mangas.findIndex(manga => manga.id === id);
         this.mangas.splice(index, 1);
@@ -48,12 +52,15 @@ export class GetAllProductShoppingCartComponent implements OnInit{
     );
   }
   checkout() {
-    this.clientService.checkout(this.mangas).subscribe(
-      data => {
-        console.log(data);
-        this.mangas = [];
-        this.priceTotal();
-      }
-    );
+    const idClient: string = localStorage.getItem('client') || "";
+    this.mangas.forEach((manga, index) => {
+      this.clientService.addProductToCheckout(idClient, manga).subscribe(
+        data => {
+          console.log(data);
+          this.mangas.splice(index, 1);
+          this.priceTotal();
+        }
+      );
+    });
   }
 }

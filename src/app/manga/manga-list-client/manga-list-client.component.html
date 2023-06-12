@@ -1,7 +1,7 @@
 <div fxLayout="row wrap" fxLayout.lt-sm="column">
 
     <mat-card class = "card-manga" fxFlex="20" *ngFor="let manga of mangas">
-        <img [ngSrc]="manga.image" alt="image anime" width="288" height="200"/>
+        <img [src]="manga.image" alt="image anime" width="288" height="200"/>
         <mat-card-header>
           <mat-card-title>{{manga.name}}</mat-card-title>
           <mat-card-subtitle>Capítulo {{manga.chapter}}</mat-card-subtitle>
