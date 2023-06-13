@@ -5,6 +5,7 @@ import {from, Observable} from 'rxjs';
 import { ClientFirestore } from '../../models/firestore/registerClientFirestore';
 import { MangaViewFirestore } from '../../models/firestore/registerProductFirestore';
 import { VendorFirestoreService } from './vendor-firestore.service';
+import { MensageService } from '../mensage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +14,19 @@ export class ClientFirestoreService {
   collectionClient: AngularFirestoreCollection<ClientFirestore>;
   NAME_COLLECTION = 'client';
 
-  constructor(private angularFirestore: AngularFirestore, private vendorFirestoreService: VendorFirestoreService) { 
+  constructor(private angularFirestore: AngularFirestore, private vendorFirestoreService: VendorFirestoreService,  private messageService: MensageService) { 
     this.collectionClient = angularFirestore.collection(this.NAME_COLLECTION);
   }
   registerClient(client: ClientFirestore): Observable<object> {
     delete client.id;
     return from(this.collectionClient.add({...client}));
   }
-  LoginClient(email: string, password: string): Observable<ClientFirestore> {
+  LoginClient(email: string, password: string): Observable<ClientFirestore | undefined> {
     return this.angularFirestore.collection(this.NAME_COLLECTION, ref => ref.where('email', '==', email).where('password', '==', password)).get().pipe(
       map(result => {
+        if (result.docs.length == 0) {
+          return undefined
+        }
         const doc = result.docs[0];
         const data = doc.data() as ClientFirestore;
         const id = doc.id;
@@ -49,6 +53,7 @@ export class ClientFirestoreService {
     );
   }
   deleteProductShoppingCart(idClient: string, idProduct: string): Observable<void> {
+    console.log(idProduct)
     return from(this.collectionClient.doc(idClient).collection('shoppingCart').doc(idProduct).delete());
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MangaViewFirestore } from 'src/app/shared/models/firestore/registerProductFirestore';
 import { ProductFirestoreService } from 'src/app/shared/service/firestore/product-firestore.service';
+import { MensageService } from 'src/app/shared/service/mensage.service';
 
 @Component({
   selector: 'app-manga-list',
@@ -10,7 +11,7 @@ import { ProductFirestoreService } from 'src/app/shared/service/firestore/produc
 export class MangaListComponent implements OnInit {
   mangas: Array<MangaViewFirestore> = [];
 
-  constructor(private mangaService: ProductFirestoreService) { }
+  constructor(private mangaService: ProductFirestoreService, private messageService: MensageService) { }
 
   ngOnInit(): void {
     this.fetchMangas();
@@ -28,6 +29,8 @@ export class MangaListComponent implements OnInit {
   deleteManga(manga: MangaViewFirestore): void {
     if (manga.id) {
       this.mangaService.deleteProduct(manga.id).subscribe(() => {
+        this.messageService.success('Manga deletado com sucesso', 'Sucesso');
+      
         this.mangas = this.mangas.filter((m) => m.id !== manga.id);
       });
     }

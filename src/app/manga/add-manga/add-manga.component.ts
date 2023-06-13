@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
 import { ProductFirestoreService } from 'src/app/shared/service/firestore/product-firestore.service';
 import { MangaViewFirestore } from 'src/app/shared/models/firestore/registerProductFirestore';
+import { MensageService } from 'src/app/shared/service/mensage.service';
 
 @Component({
   selector: 'app-add-manga',
@@ -16,7 +17,7 @@ export class AddMangaComponent implements OnInit {
   manga: MangaViewFirestore = new MangaViewFirestore();
 
 
-  constructor(private fb: FormBuilder, private mangaService: ProductFirestoreService, private router: Router, private routeActive: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private mangaService: ProductFirestoreService, private router: Router, private routeActive: ActivatedRoute, private messageService: MensageService) {
     const id = this.routeActive.snapshot.paramMap.get('id');
     this.manga = new MangaViewFirestore()
     if (id) {
@@ -64,17 +65,23 @@ export class AddMangaComponent implements OnInit {
       this.manga.vendor = localStorage.getItem('id') || '';
       if (this.mangaRegister) {
         this.mangaService.registerProduct(this.manga).subscribe(
-          () => this.router.navigate(['/manga'])
+          () => {
+            this.messageService.success('Manga registered successfully', 'Success');
+            this.router.navigate(['/manga'])
+          }
         );
       }
       else {
         this.mangaService.updateProduct(this.manga).subscribe(
-          () => this.router.navigate(['/manga'])
+          () => {
+            this.messageService.success('Manga updated successfully', 'Success');
+            this.router.navigate(['/manga'])
+          }
         );
       }
     }
     else {
-      alert('Invalid form');
+      this.messageService.error('Invalid form', 'Error')
     }
   }
 }

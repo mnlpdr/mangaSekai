@@ -19,9 +19,12 @@ export class VendorFirestoreService {
     delete vendor.id;
     return from(this.collectionVendor.add({...vendor}));
   }
-  LoginVendor(email: string, password: string): Observable<VendorFirestore> {
+  LoginVendor(email: string, password: string): Observable<VendorFirestore | undefined> {
     return this.angularFirestore.collection(this.NAME_COLLECTION, ref => ref.where('email', '==', email).where('password', '==', password)).get().pipe(
       map(result => {
+        if (result.docs.length == 0) {
+          return undefined;
+        }
         const doc = result.docs[0];
         const data = doc.data() as VendorFirestore;
         const id = doc.id;
