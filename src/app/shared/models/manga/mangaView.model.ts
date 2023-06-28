@@ -9,6 +9,5 @@ export class MangaView {
         public genre: string,
         public publication: string,
         public image: string,
-        public vendor: string,
     ) {}
 }

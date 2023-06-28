@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MangaViewFirestore } from 'src/app/shared/models/firestore/registerProductFirestore';
-import { MangaView } from 'src/app/shared/models/mangaView.model';
+import { MangaView } from 'src/app/shared/models/manga/mangaView.model';
 import { ClientService } from 'src/app/shared/service/client.service';
 import { ClientFirestoreService } from 'src/app/shared/service/firestore/client-firestore.service';
 

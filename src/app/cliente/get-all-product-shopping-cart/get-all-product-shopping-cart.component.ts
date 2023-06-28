@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MangaViewFirestore } from 'src/app/shared/models/firestore/registerProductFirestore';
-import { MangaView } from 'src/app/shared/models/mangaView.model';
+import { MangaView } from 'src/app/shared/models/manga/mangaView.model';
 import { ClientService } from 'src/app/shared/service/client.service';
-import { ClientFirestoreService } from 'src/app/shared/service/firestore/client-firestore.service';
 import { MensageService } from 'src/app/shared/service/mensage.service';
 
 @Component({
@@ -12,11 +10,12 @@ import { MensageService } from 'src/app/shared/service/mensage.service';
 })
 export class GetAllProductShoppingCartComponent implements OnInit{
 
-  mangas: Array<MangaViewFirestore> = new Array<MangaViewFirestore>();
+  mangas: Array<MangaView> = new Array<MangaView>();
+  id: number = 0;
   purchaseTotal = 0;
   purchase = true;
 
-  constructor(private clientService: ClientFirestoreService, private messageService: MensageService) { }
+  constructor(private clientService: ClientService, private messageService: MensageService) { }
 
   ngOnInit(): void {
     this.fetchAllProductShoppingCart();
@@ -32,39 +31,38 @@ export class GetAllProductShoppingCartComponent implements OnInit{
   }
 
   fetchAllProductShoppingCart() {
-    const id = localStorage.getItem('client') || "";
-    this.clientService.getAllProductShoppingCart(id).subscribe(
+    this.clientService.AllProductsShoppingCart().subscribe(
       data => {
-        console.log(data)
-        this.mangas = data;
+        this.id = data.id;
+        this.mangas = data.products;
         this.priceTotal();
       }
     );
   }
   
   deleteProductShoppingCart(id: string) {
-    const idClient: string = localStorage.getItem('client') || "";
-    this.clientService.deleteProductShoppingCart(idClient, id).subscribe(
-      data => {
-        this.messageService.success('Produto removido do carrinho', 'Sucesso');
-        const index = this.mangas.findIndex(manga => manga.id === id);
-        this.mangas.splice(index, 1);
-        this.priceTotal();
-      }
-    );
+    // const idClient: string = localStorage.getItem('client') || "";
+    // this.clientService.deleteProductShoppingCart(idClient, id).subscribe(
+    //   data => {
+    //     this.messageService.success('Produto removido do carrinho', 'Sucesso');
+    //     const index = this.mangas.findIndex(manga => manga.id === id);
+    //     this.mangas.splice(index, 1);
+    //     this.priceTotal();
+    //   }
+    // );
   }
   checkout() {
-    const idClient: string = localStorage.getItem('client') || "";
-    this.mangas.forEach((manga, index) => {
-      this.clientService.addProductToCheckout(idClient, manga).subscribe(
-        data => {
-          this.messageService.success('Compra realizada com sucesso', 'Sucesso');
+    // const idClient: string = localStorage.getItem('client') || "";
+    // this.mangas.forEach((manga, index) => {
+    //   this.clientService.addProductToCheckout(idClient, manga).subscribe(
+    //     data => {
+    //       this.messageService.success('Compra realizada com sucesso', 'Sucesso');
 
-          console.log(data);
-          this.mangas.splice(index, 1);
-          this.priceTotal();
-        }
-      );
-    });
+    //       console.log(data);
+    //       this.mangas.splice(index, 1);
+    //       this.priceTotal();
+    //     }
+    //   );
+    // });
   }
 }

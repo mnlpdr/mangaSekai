@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RegisterVendor } from '../models/registerVendor.model';
-import { LoginVendor } from '../models/loginVendor.model';
-import { Token } from '../models/token.model';
-import { Manga } from '../models/manga.model';
+import { RegisterVendor } from '../models/seiller/registerVendor.model';
+import { LoginVendor } from '../models/seiller/loginVendor.model';
+import { Token } from '../models/token/token.model';
+import { Manga } from '../models/manga/manga.model';
 import { Observable } from 'rxjs';
-import { MangaView } from '../models/mangaView.model';
+import { MangaView } from '../models/manga/mangaView.model';
 
 @Injectable({
   providedIn: 'root'
