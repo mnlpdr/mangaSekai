@@ -1,6 +1,6 @@
 export class MangaView {
     constructor(
-        public id: string,
+        public id: number,
         public name: string,
         public chapter: number,
         public price: number,

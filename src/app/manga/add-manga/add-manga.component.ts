@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
-import { ProductFirestoreService } from 'src/app/shared/service/firestore/product-firestore.service';
-import { MangaViewFirestore } from 'src/app/shared/models/firestore/registerProductFirestore';
+import { Manga } from 'src/app/shared/models/manga/manga.model';
 import { MensageService } from 'src/app/shared/service/mensage.service';
+import { VendorService } from 'src/app/shared/service/vendor.service';
 
 @Component({
   selector: 'app-add-manga',
@@ -14,16 +14,15 @@ export class AddMangaComponent implements OnInit {
   mangaForm!: FormGroup;
   mangaRegister = true;
   nameBotao = "Register";
-  manga: MangaViewFirestore = new MangaViewFirestore();
+  manga: Manga | undefined;
 
-
-  constructor(private fb: FormBuilder, private mangaService: ProductFirestoreService, private router: Router, private routeActive: ActivatedRoute, private messageService: MensageService) {
+  constructor(private fb: FormBuilder, private VendorService: VendorService, private router: Router, private routeActive: ActivatedRoute, private messageService: MensageService) {
     const id = this.routeActive.snapshot.paramMap.get('id');
-    this.manga = new MangaViewFirestore()
+
     if (id) {
       this.mangaRegister = false;
       this.nameBotao = "Save";
-      this.mangaService.getProductById(id).subscribe(
+      this.VendorService.getManga(Number(id)).subscribe(
         data => {
           this.manga = data;
           this.mangaForm = this.fb.group({
@@ -58,30 +57,29 @@ export class AddMangaComponent implements OnInit {
 
   onSubmit() {
     if (this.mangaForm.valid) {
-      const id = this.manga.id;
-      this.manga = {id, ...this.mangaForm.value};
-      this.manga.price = Number(this.manga.price);
-      this.manga.chapter = Number(this.manga.chapter);
-      this.manga.vendor = localStorage.getItem('id') || '';
-      if (this.mangaRegister) {
-        this.mangaService.registerProduct(this.manga).subscribe(
-          () => {
-            this.messageService.success('Manga registered successfully', 'Success');
-            this.router.navigate(['/manga'])
-          }
-        );
-      }
-      else {
-        this.mangaService.updateProduct(this.manga).subscribe(
-          () => {
-            this.messageService.success('Manga updated successfully', 'Success');
-            this.router.navigate(['/manga'])
-          }
-        );
+      if(this.manga) {
+        const id = this.manga.id;
+        if (this.mangaRegister) {
+          this.VendorService.addManga(this.mangaForm.value).subscribe(
+            () => {
+              this.messageService.success('Manga registered successfully', 'Success');
+              this.router.navigate(['/manga'])
+            }
+          );
+        }
+        else {
+          this.VendorService.updateManga({...this.mangaForm.value, id}).subscribe(
+            () => {
+              this.messageService.success('Manga updated successfully', 'Success');
+              this.router.navigate(['/manga'])
+            }
+          );
+        }
       }
     }
     else {
       this.messageService.error('Invalid form', 'Error')
     }
   }
+
 }

@@ -40,7 +40,7 @@ export class GetAllProductShoppingCartComponent implements OnInit{
     );
   }
   
-  deleteProductShoppingCart(id: string) {
+  deleteProductShoppingCart(id: number) {
     // const idClient: string = localStorage.getItem('client') || "";
     // this.clientService.deleteProductShoppingCart(idClient, id).subscribe(
     //   data => {

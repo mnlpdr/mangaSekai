@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { VendorFirestore } from 'src/app/shared/models/firestore/registerVendorFirestore';
-import { VendorFirestoreService } from 'src/app/shared/service/firestore/vendor-firestore.service';
 import { VendorService } from 'src/app/shared/service/vendor.service';
 
 @Component({
@@ -12,7 +10,7 @@ import { VendorService } from 'src/app/shared/service/vendor.service';
 })
 export class CadastroComponent {
   vendorForm: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router, private vendorService: VendorFirestoreService) {
+  constructor(private fb: FormBuilder, private router: Router, private vendorService: VendorService) {
     this.vendorForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50), Validators.pattern('^[a-zA-ZÀ-ÿ ]+$')]],
       email: ['', [Validators.required, Validators.email]],
@@ -26,17 +24,7 @@ export class CadastroComponent {
     if (this.vendorForm.valid) {
       const vendor = this.vendorForm.value;
       if (vendor.password === vendor.confirmPassword) {
-        const vendorFirestore: VendorFirestore = {
-          name: vendor.name,
-          email: vendor.email,
-          description: vendor.description,
-          password: vendor.password,
-          products: [],
-          sold: []
-        }
-
-
-        this.vendorService.registerVendor(vendorFirestore).subscribe(
+        this.vendorService.registerVendor(vendor).subscribe(
           res => {
             this.router.navigate(['login/vendedor']);
             console.log(res);

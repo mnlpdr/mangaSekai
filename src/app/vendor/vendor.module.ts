@@ -11,6 +11,10 @@ import { CadastroComponent } from './cadastro/cadastro.component';
   ],
   imports: [
     ImportsModuleModule,
+  ],
+  exports: [
+    LoginComponent,
+    CadastroComponent
   ]
 })
 export class VendorModule { }

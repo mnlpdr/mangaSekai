@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { VendorFirestoreService } from 'src/app/shared/service/firestore/vendor-firestore.service';
 import { MensageService } from 'src/app/shared/service/mensage.service';
 import { VendorService } from 'src/app/shared/service/vendor.service';
 
@@ -13,7 +12,7 @@ import { VendorService } from 'src/app/shared/service/vendor.service';
 })
 export class LoginComponent {
   vendorForm: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router, private vendorService: VendorFirestoreService, private messageService: MensageService) {
+  constructor(private fb: FormBuilder, private router: Router, private vendorService: VendorService, private messageService: MensageService) {
     this.vendorForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50)]],
@@ -22,13 +21,12 @@ export class LoginComponent {
   onSubmit() {
     if (this.vendorForm.valid) {
       const vendor = this.vendorForm.value;
-      this.vendorService.LoginVendor(vendor.email, vendor.password).subscribe(
+      this.vendorService.loginVendor(vendor).subscribe(
         res => {
           if (res) {
             if (res.id != undefined) {
-              localStorage.setItem('id', res.id);
+              localStorage.setItem('id', res.id.toString());
               this.router.navigate(['/manga']);
-              console.log(res);
             }
           }
           else {

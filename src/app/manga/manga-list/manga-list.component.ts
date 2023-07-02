@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MangaViewFirestore } from 'src/app/shared/models/firestore/registerProductFirestore';
-import { ProductFirestoreService } from 'src/app/shared/service/firestore/product-firestore.service';
+import { Manga } from 'src/app/shared/models/manga/manga.model';
 import { MensageService } from 'src/app/shared/service/mensage.service';
+import { VendorService } from 'src/app/shared/service/vendor.service';
 
 @Component({
   selector: 'app-manga-list',
@@ -9,28 +9,25 @@ import { MensageService } from 'src/app/shared/service/mensage.service';
   styleUrls: ['./manga-list.component.css']
 })
 export class MangaListComponent implements OnInit {
-  mangas: Array<MangaViewFirestore> = [];
+  mangas: Array<Manga> = [];
 
-  constructor(private mangaService: ProductFirestoreService, private messageService: MensageService) { }
+  constructor(private VendorService: VendorService, private messageService: MensageService) { }
 
   ngOnInit(): void {
     this.fetchMangas();
   }
 
   fetchMangas(): void {
-    const id: string | null = localStorage.getItem('id');
-    if (id) {
-      this.mangaService.getProductOfVendor(id).subscribe((data) => {
-        console.log(data);
-        this.mangas = data;
-      });
-    }
+    this.VendorService.getMangas().subscribe((data) => {
+      console.log(data);
+      this.mangas = data;
+    });
   }
-  deleteManga(manga: MangaViewFirestore): void {
+  
+  deleteManga(manga: Manga): void {
     if (manga.id) {
-      this.mangaService.deleteProduct(manga.id).subscribe(() => {
+      this.VendorService.deleteManga(manga.id).subscribe(() => {
         this.messageService.success('Manga deletado com sucesso', 'Sucesso');
-      
         this.mangas = this.mangas.filter((m) => m.id !== manga.id);
       });
     }

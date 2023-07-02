@@ -1,14 +1,12 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {MangaModule} from "./manga/manga.module";
 import { MenuModule} from "./menu/menu.module";
-import { CurrencyPipe } from '@angular/common'
-import { LOCALE_ID } from '@angular/core';
+import { CurrencyPipe, registerLocaleData } from '@angular/common'
 import localePt from '@angular/common/locales/pt';
-import {registerLocaleData} from '@angular/common';
 import { ImportsModuleModule } from './imports-module/imports-module.module';
-//import { VendorModule } from './vendor/vendor.module';
+import { VendorModule } from './vendor/vendor.module';
 import { ClienteModule } from './cliente/cliente.module';
 import {InterceptorModule} from './interceptor/interceptor.module';
 
@@ -24,7 +22,7 @@ registerLocaleData(localePt);
     AppRoutingModule,
     MenuModule,
     ImportsModuleModule,
-    //VendorModule,
+    VendorModule,
     InterceptorModule,
     ClienteModule,
     MangaModule

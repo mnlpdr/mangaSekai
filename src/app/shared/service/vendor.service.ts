@@ -2,44 +2,49 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RegisterVendor } from '../models/seiller/registerVendor.model';
 import { LoginVendor } from '../models/seiller/loginVendor.model';
-import { Token } from '../models/token/token.model';
 import { Manga } from '../models/manga/manga.model';
 import { Observable } from 'rxjs';
 import { MangaView } from '../models/manga/mangaView.model';
+import { LoginResponse } from '../models/loginResponse/loginResponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VendorService {
-  URL = 'http://localhost:8000/vendedor';
+  URL = 'http://localhost:8080/vendor';
 
   constructor(private http: HttpClient) { }
   
 
   registerVendor(vendor: RegisterVendor) {
 
-    return this.http.post(`${this.URL}/cadastrar`, vendor);
+    return this.http.post(`${this.URL}/register`, vendor);
   }
   loginVendor(vendor: LoginVendor) {
-    return this.http.post<Token>(`${this.URL}/login`,vendor);
-  }
-  addManga(manga: Manga): Observable<undefined> {
-    return this.http.post<undefined>(`${this.URL}/produto/cadastrar`, manga);
-  }
-  getMangas(): Observable<Array<Manga>> {
-    return this.http.get<Array<Manga>>(`${this.URL}/produto`);
+    return this.http.post<LoginResponse>(`${this.URL}/login`,vendor);
   }
 
-  getManga(id: string): Observable<Manga> {
-    return this.http.get<Manga>(`${this.URL}/produto/${id}`);
+  getMangas(): Observable<Array<Manga>> {
+    const id: number = Number(localStorage.getItem("id"));
+    return this.http.get<Array<Manga>>(`${this.URL}/${id}/products`);
+  }
+
+  addManga(manga: Manga): Observable<undefined> {
+    const id: number = Number(localStorage.getItem("id"));
+    return this.http.post<undefined>(`${this.URL}/${id}/product`, manga);
+  }
+ 
+  getManga(id: number): Observable<Manga> {
+    return this.http.get<Manga>(`${this.URL}/product/${id}`);
   }
   updateManga(manga: Manga): Observable<undefined> {
-    return this.http.put<undefined>(`${this.URL}/produto/editar/${manga.id}`, manga);
+    return this.http.put<undefined>(`${this.URL}/product`, manga);
   }
-  deleteManga(id: string): Observable<Manga> {
-    return this.http.delete<Manga>(`${this.URL}/produto/deletar/${id}`);
+  deleteManga(id: number): Observable<undefined> {
+    return this.http.delete<undefined>(`${this.URL}/product/${id}`);
   }
-  getMangaSold(): Observable<Array<MangaView>> {
-    return this.http.get<Array<MangaView>>(`${this.URL}/produto/vendidos`);
+  getMangaSold(): Observable<Array<Manga>> {
+    const id: number = Number(localStorage.getItem("id"));
+    return this.http.get<Array<Manga>>(`${this.URL}/${id}/checkout`);
   }
 }
