@@ -25,7 +25,7 @@ export class CadastrarClienteComponent {
       if (client.password === client.confirmPassword) {
         this.clientService.registerClient(client).subscribe(
           res => {
-            //this.router.navigate(['login/cliente']);
+            this.router.navigate(['login/cliente']);
             console.log(res);
         })
       }
