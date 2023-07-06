@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { SignUpClient } from '../models/client/registerClient.model';
 import { SignInClient } from '../models/client/loginClient';
 import { Observable } from 'rxjs';
-import { Token } from '../models/token/token.model';
 import { MangaView } from '../models/manga/mangaView.model';
 import { Message } from '../models/message/message.model';
 import { LoginResponse } from '../models/loginResponse/loginResponse';
 import { ShoppingCart } from '../models/client/shoppingCart';
+import { Manga } from '../models/manga/manga.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,23 +30,27 @@ export class ClientService {
     return this.http.get<Array<MangaView>>(`${this.URL}/products`);
   }
 
-//   addShoppingCart(manga: MangaView): Observable<MangaView> {
-//     return this.http.post<MangaView>(`${this.URL}/carrinho`, manga);
-//   }
+  addShoppingCart(manga: Manga): Observable<MangaView> {
+    const id = Number(localStorage.getItem('client'));
+    return this.http.post<MangaView>(`${this.URL}/${id}/shoppingCart`, manga);
+  }
 
   AllProductsShoppingCart(): Observable<ShoppingCart> {
     const id = Number(localStorage.getItem('client'));
     return this.http.get<ShoppingCart>(`${this.URL}/${id}/shoppingCart`);
   }
-//   deleteProductShoppingCart(id: string): Observable<Message> {
-//     return this.http.delete<Message>(`${this.URL}/carrinho/${id}`);
-//   }
-//   checkout(mangas: Array<MangaView>): Observable<Message> {
-//     return this.http.post<Message>(`${this.URL}/carrinho/comprar`, mangas);
-//   }
+  deleteProductShoppingCart(idProduct: number): Observable<Message> {
+    const id = Number(localStorage.getItem("shoppingCart"));
+    return this.http.delete<Message>(`${this.URL}/shoppingCart/${id}/${idProduct}`);
+  }
+  checkout(): Observable<Message> {
+    const id = Number(localStorage.getItem('shoppingCart'));
+    return this.http.post<Message>(`${this.URL}/shoppingCart/${id}/checkout`, undefined);
+  }
 
-//   getProductsCheckout(): Observable<Array<MangaView>> {
-//     return this.http.get<Array<MangaView>>(`${this.URL}/comprados`);
-//   }
+  getProductsCheckout(): Observable<Array<Manga>> {
+    const id = Number(localStorage.getItem('client'));
+    return this.http.get<Array<Manga>>(`${this.URL}/${id}/checkouts`);
+  }
 }
 

@@ -9,7 +9,7 @@ import { CadastrarClienteComponent } from './cliente/cadastrar-cliente/cadastrar
 import { LoginClienteComponent } from './cliente/login-cliente/login-cliente.component';
 import { MangaListClientComponent } from './manga/manga-list-client/manga-list-client.component';
 import { GetAllProductShoppingCartComponent } from './cliente/get-all-product-shopping-cart/get-all-product-shopping-cart.component';
-// import { ProductCheckoutComponent } from './cliente/product-checkout/product-checkout.component';
+import { ProductCheckoutComponent } from './cliente/product-checkout/product-checkout.component';
 
 const routes: Routes = [
   {
@@ -52,10 +52,10 @@ const routes: Routes = [
     path: "cliente/carrinho",
     component: GetAllProductShoppingCartComponent
   },
-  // {
-  //   path: "cliente/checkout",
-  //   component: ProductCheckoutComponent
-  // }
+  {
+    path: "cliente/checkout",
+    component: ProductCheckoutComponent
+  }
 ];
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Manga } from 'src/app/shared/models/manga/manga.model';
 import { MensageService } from 'src/app/shared/service/mensage.service';
 import { VendorService } from 'src/app/shared/service/vendor.service';
@@ -51,30 +51,26 @@ export class AddMangaComponent implements OnInit {
       });
     }
   }
-  ngOnInit(): void {
-  
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     if (this.mangaForm.valid) {
-      if(this.manga) {
-        const id = this.manga.id;
-        if (this.mangaRegister) {
-          this.VendorService.addManga(this.mangaForm.value).subscribe(
-            () => {
-              this.messageService.success('Manga registered successfully', 'Success');
-              this.router.navigate(['/manga'])
-            }
-          );
-        }
-        else {
-          this.VendorService.updateManga({...this.mangaForm.value, id}).subscribe(
-            () => {
-              this.messageService.success('Manga updated successfully', 'Success');
-              this.router.navigate(['/manga'])
-            }
-          );
-        }
+      if (this.mangaRegister) {
+        this.VendorService.addManga(this.mangaForm.value).subscribe(
+          () => {
+            this.messageService.success('Manga registered successfully', 'Success');
+            this.router.navigate(['/manga'])
+          }
+        );
+      }
+      else {
+        const id = Number(this.routeActive.snapshot.paramMap.get('id'));
+        this.VendorService.updateManga({ ...this.mangaForm.value, id }).subscribe(
+          () => {
+            this.messageService.success('Manga updated successfully', 'Success');
+            this.router.navigate(['/manga'])
+          }
+        );
       }
     }
     else {

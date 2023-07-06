@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MangaViewFirestore } from 'src/app/shared/models/firestore/registerProductFirestore';
-import { MangaView } from 'src/app/shared/models/manga/mangaView.model';
+import { Manga } from 'src/app/shared/models/manga/manga.model';
 import { ClientService } from 'src/app/shared/service/client.service';
-import { ClientFirestoreService } from 'src/app/shared/service/firestore/client-firestore.service';
 
 @Component({
   selector: 'app-product-checkout',
@@ -10,9 +8,9 @@ import { ClientFirestoreService } from 'src/app/shared/service/firestore/client-
   styleUrls: ['./product-checkout.component.css']
 })
 export class ProductCheckoutComponent implements OnInit{
-  mangas: Array<MangaViewFirestore> = new Array<MangaViewFirestore>();
+  mangas: Array<Manga> = new Array<Manga>();
   checkoutTotal = 0;
-  constructor(private clientService: ClientFirestoreService) { }
+  constructor(private clientService: ClientService) { }
 
   ngOnInit(): void {
     this.fetchAllProductCheckout();
@@ -24,8 +22,7 @@ export class ProductCheckoutComponent implements OnInit{
   }
 
   fetchAllProductCheckout() {
-    const id = localStorage.getItem('client') || "";
-    this.clientService.getAllProductCheckout(id).subscribe(
+    this.clientService.getProductsCheckout().subscribe(
       data => {
         this.mangas = data;
         this.totalCheckout();

@@ -34,6 +34,7 @@ export class GetAllProductShoppingCartComponent implements OnInit{
     this.clientService.AllProductsShoppingCart().subscribe(
       data => {
         this.id = data.id;
+        localStorage.setItem('shoppingCart', this.id.toString());
         this.mangas = data.products;
         this.priceTotal();
       }
@@ -41,28 +42,22 @@ export class GetAllProductShoppingCartComponent implements OnInit{
   }
   
   deleteProductShoppingCart(id: number) {
-    // const idClient: string = localStorage.getItem('client') || "";
-    // this.clientService.deleteProductShoppingCart(idClient, id).subscribe(
-    //   data => {
-    //     this.messageService.success('Produto removido do carrinho', 'Sucesso');
-    //     const index = this.mangas.findIndex(manga => manga.id === id);
-    //     this.mangas.splice(index, 1);
-    //     this.priceTotal();
-    //   }
-    // );
+    this.clientService.deleteProductShoppingCart(id).subscribe(
+      data => {
+        this.messageService.success('Produto removido do carrinho', 'Sucesso');
+        const index = this.mangas.findIndex(manga => manga.id === id);
+        this.mangas.splice(index, 1);
+        this.priceTotal();
+      }
+    );
   }
   checkout() {
-    // const idClient: string = localStorage.getItem('client') || "";
-    // this.mangas.forEach((manga, index) => {
-    //   this.clientService.addProductToCheckout(idClient, manga).subscribe(
-    //     data => {
-    //       this.messageService.success('Compra realizada com sucesso', 'Sucesso');
-
-    //       console.log(data);
-    //       this.mangas.splice(index, 1);
-    //       this.priceTotal();
-    //     }
-    //   );
-    // });
+    this.clientService.checkout().subscribe(
+      data => {
+        this.messageService.success("Compra realizada com sucesso", "Sucesso");
+        this.mangas = [];
+        this.priceTotal();
+      }
+    );
   }
 }
